@@ -9,7 +9,12 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', (socket) => { console.log("User connected!") });
+io.on('connection', (socket) => { 
+    console.log("User connected!");
+    socket.on('disconnect', () => {
+        console.log("User disconnected!")
+    });
+});
 
 server.listen(8080, () => {
   console.log('Server listening on ' + server.address().port);
